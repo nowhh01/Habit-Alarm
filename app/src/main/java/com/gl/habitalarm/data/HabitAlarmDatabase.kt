@@ -16,25 +16,20 @@ abstract class HabitAlarmDatabase : RoomDatabase() {
         @Volatile
         private var mINSTANCE: HabitAlarmDatabase? = null
 
-        fun getInstance(context: Context): HabitAlarmDatabase? {
-            if (mINSTANCE == null) {
-                initialize(context)
+        fun getInstance(context: Context): HabitAlarmDatabase {
+            return mINSTANCE ?: synchronized(this) {
+                mINSTANCE ?: buildDatabase(context).also { mINSTANCE = it }
             }
-            return mINSTANCE
         }
 
-        private fun initialize(context: Context) {
-            synchronized(HabitAlarmDatabase::class.java) {
-                if (mINSTANCE == null) {
-                    mINSTANCE = Room.databaseBuilder(
-                            context.applicationContext,
-                            HabitAlarmDatabase::class.java,
-                            "habit_alarm_db"
-                        )
-                        .allowMainThreadQueries()
-                        .build()
-                }
-            }
+        private fun buildDatabase(context: Context): HabitAlarmDatabase{
+            return Room.databaseBuilder(
+                    context.applicationContext,
+                    HabitAlarmDatabase::class.java,
+                    "habit_alarm_db"
+                )
+                .allowMainThreadQueries()
+                .build()
         }
     }
 }
