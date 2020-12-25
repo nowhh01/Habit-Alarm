@@ -5,7 +5,7 @@ import androidx.room.Relation
 
 data class HabitWithRepetitions(
     @Embedded
-    var habit: Habit?,
+    var habit: Habit,
     @Relation(parentColumn = "habit_id", entityColumn = "repetition_habit_id")
-    var repetitions: List<Repetition>?
+    var repetitions: List<Repetition> = emptyList()
 )
