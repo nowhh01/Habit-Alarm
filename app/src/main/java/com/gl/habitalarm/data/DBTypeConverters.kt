@@ -1,6 +1,7 @@
 package com.gl.habitalarm.data
 
 import androidx.room.TypeConverter
+import com.gl.habitalarm.enums.ERepetitionState
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -51,5 +52,15 @@ class DBTypeConverters {
             current = current shl 1
         }
         return booleans
+    }
+
+    @TypeConverter
+    fun ERepetitionStateToInt(state: ERepetitionState): Int {
+        return state.ordinal
+    }
+
+    @TypeConverter
+    fun IntToERepetitionState(ordinal: Int): ERepetitionState {
+        return ERepetitionState.values().getOrElse(ordinal) { ERepetitionState.None }
     }
 }

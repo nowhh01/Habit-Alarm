@@ -9,8 +9,8 @@ import java.time.LocalTime
 data class Habit(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "habit_id")
-    val id: Long,
+    val id: Long = 0,
     val name: String,
-    val days: BooleanArray = BooleanArray(7),
+    val days: BooleanArray,
     val notifyingTime: LocalTime?
 )

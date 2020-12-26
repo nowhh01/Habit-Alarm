@@ -9,7 +9,7 @@ interface HabitDao {
     fun getHabitById(id: Long): Flow<Habit>
 
     @Query("SELECT * FROM habit WHERE name = :name LIMIT 1")
-    fun getHabitByName(name: String?): Flow<Habit>
+    fun getHabitByName(name: String): Flow<Habit>
 
     @Transaction
     @Query("SELECT * FROM habit WHERE habit_id = :id LIMIT 1")
