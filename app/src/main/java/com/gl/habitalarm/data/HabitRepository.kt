@@ -1,5 +1,6 @@
 package com.gl.habitalarm.data
 
+import com.gl.habitalarm.enums.EDay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -14,7 +15,7 @@ class HabitRepository @Inject constructor(private val mHabitDao: HabitDao) {
         return mHabitDao.getHabitById(id)
     }
 
-    fun getHabitByName(name: String): Flow<Habit?>? {
+    fun getHabitByName(name: String): Flow<Habit> {
         return mHabitDao.getHabitByName(name)
     }
 
@@ -22,14 +23,12 @@ class HabitRepository @Inject constructor(private val mHabitDao: HabitDao) {
         return mHabitDao.getHabitWithRepetitionsById(id)
     }
 
-    fun getHabitsByDayOfWeek(day: DayOfWeek): Flow<List<Habit>> {
-        val value = day.value % 7
-        return mHabitDao.getHabitsByDay(value)
+    fun getHabitsByDay(day: EDay): Flow<List<Habit>> {
+        return mHabitDao.getHabitsByDay(day.ordinal)
     }
 
-    fun getHabitsWithRepetitionsByDayOfWeek(day: DayOfWeek): Flow<List<HabitWithRepetitions>> {
-        val value = day.value % 7
-        return mHabitDao.getHabitsWithRepetitionsByDay(value)
+    fun getHabitsWithRepetitionsByDay(day: EDay): Flow<List<HabitWithRepetitions>> {
+        return mHabitDao.getHabitsWithRepetitionsByDay(day.ordinal)
     }
 
     fun getHabitsWithRepetitionsByDate(date: LocalDate): Flow<List<HabitWithRepetition>> {

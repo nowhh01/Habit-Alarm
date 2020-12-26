@@ -4,7 +4,7 @@ import androidx.room.Embedded
 
 data class HabitWithRepetition(
     @Embedded
-    var habit: Habit,
+    val habit: Habit,
     @Embedded
-    var repetition: Repetition?
+    val repetition: Repetition? = null
 )
