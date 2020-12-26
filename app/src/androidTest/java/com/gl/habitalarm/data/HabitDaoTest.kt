@@ -100,7 +100,7 @@ class HabitDaoTest {
     }
 
     @Test
-    fun getHabitByDayOfWeek_habit_habitWithSameValues() = runBlockingTest {
+    fun getHabitByDay_habit_habitWithSameValues() = runBlockingTest {
         val expected = Habit(
             name = "Reading a book",
             days = booleanArrayOf(false, true, true, false, false, false, false),
