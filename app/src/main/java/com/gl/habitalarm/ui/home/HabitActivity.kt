@@ -13,7 +13,7 @@ private const val TAG = "HabitActivity"
 
 @AndroidEntryPoint
 class HabitActivity : AppCompatActivity() {
-    private val viewModel: HabitViewModel by viewModels()
+    private val mViewModel: HabitViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate(): called")

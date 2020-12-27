@@ -14,7 +14,7 @@ import com.gl.habitalarm.databinding.FragmentDateSelectorBinding
 private const val TAG = "DateSelectorFragment"
 
 class DateSelectorFragment : Fragment() {
-    private val viewModel: HabitViewModel by activityViewModels()
+    private val mViewModel: HabitViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +28,7 @@ class DateSelectorFragment : Fragment() {
             container,
             false
         )
-        binding.viewModel = viewModel
+        binding.viewModel = mViewModel
         binding.lifecycleOwner = this
 
         return binding.root
