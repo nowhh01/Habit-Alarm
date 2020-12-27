@@ -5,7 +5,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.gl.habitalarm.data.HabitRepository
 import com.gl.habitalarm.data.HabitWithRepetition
+import com.gl.habitalarm.data.Repetition
 import com.gl.habitalarm.data.RepetitionRepository
+import com.gl.habitalarm.enums.ERepetitionState
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 private const val TAG = "HabitViewModel"
@@ -57,6 +60,32 @@ class HabitViewModel @ViewModelInject constructor(
             mDate.value = next
 
             Log.d(TAG, "changeToNextDate(): mDate value changed to $next")
+        }
+    }
+
+    fun saveOrUpdateRepetition(repetition: Repetition?, habitId: Long, isChecked: Boolean) {
+        viewModelScope.launch {
+            Log.d(TAG, "saveOrUpdateRepetition(): called with habitId $habitId, $isChecked")
+
+            if (isChecked) {
+                val date = mDate.value!!
+                val state = ERepetitionState.Done
+                val newRepetition = Repetition(
+                    habitId = habitId,
+                    date = date,
+                    state = state
+                )
+                mRepetitionRepository.addRepetition(newRepetition)
+                Log.d(
+                    TAG,
+                    "saveOrUpdateRepetition(): Repetition with habitId $habitId, date $date, state $state saved")
+
+            } else {
+                mRepetitionRepository.removeRepetition(repetition!!)
+                Log.d(
+                    TAG,
+                    "saveOrUpdateRepetition(): Repetition with ${repetition.id} removed")
+            }
         }
     }
 }
