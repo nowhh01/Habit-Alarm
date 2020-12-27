@@ -26,10 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-<!--            <fragment-->
-<!--                android:id="@+id/fragment_habit_list"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content" />-->
+            <fragment
+                android:id="@+id/fragment_habit_list"
+                android:name="com.gl.habitalarm.ui.home.HabitListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
