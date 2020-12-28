@@ -14,19 +14,19 @@ class CreateViewModel @ViewModelInject constructor(
     private val mHabitRepository: HabitRepository
 ): ViewModel() {
     private val mHabitName = MutableLiveData("")
-    val habitName: LiveData<String>
+    val habitName: MutableLiveData<String>
         get() = mHabitName
 
     private val mbNotificationOn = MutableLiveData(false)
-    val isNotificationOn: LiveData<Boolean>
+    val isNotificationOn: MutableLiveData<Boolean>
         get() = mbNotificationOn
 
     private val mHour = MutableLiveData(0)
-    val hour: LiveData<Int>
+    val hour: MutableLiveData<Int>
         get() = mHour
 
     private val mMinute = MutableLiveData(0)
-    val minute: LiveData<Int>
+    val minute: MutableLiveData<Int>
         get() = mMinute
 
     private val mbSaved = MutableLiveData(false)
@@ -34,7 +34,7 @@ class CreateViewModel @ViewModelInject constructor(
         get() = mbSaved
 
     private val mbDayOns = MutableLiveData(BooleanArray(7))
-    val isDayOns: LiveData<BooleanArray>
+    val isDayOns: MutableLiveData<BooleanArray>
         get() = mbDayOns
 
     private val mbAllDaysOn: LiveData<Boolean> =
@@ -60,6 +60,7 @@ class CreateViewModel @ViewModelInject constructor(
 
         val bDayOns = mbDayOns.value!!
         bDayOns[day] = !bDayOns[day]
+
         if (checkAllDaysOn(bDayOns)) {
             changeAllDayOnsTo(false)
         } else {
@@ -89,6 +90,10 @@ class CreateViewModel @ViewModelInject constructor(
                 Log.d(TAG, "onSaveClick(): habitName empty")
 
                 return@launch
+            }
+
+            if (mbAllDaysOn.value!!) {
+                changeAllDayOnsTo(true)
             }
 
             val habit = Habit(
