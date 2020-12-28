@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.create.CreateActivity">
+
+    <data>
+        <import type="androidx.databinding.adapters.TimePickerBindingAdapter" />
+        <import type="android.view.View" />
+        <import type="com.gl.habitalarm.enums.EDay" />
+
+        <variable
+            name="viewModel"
+            type="com.gl.habitalarm.ui.create.CreateViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="NAME YOUR HABIT" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Workout, Read a book, etc."
+                    android:text="@={viewModel.habitName}"
+                    tools:text="name of habit" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="ON WHICH DAYS?" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Sunday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Sunday.ordinal)}"
+                        android:text="@string/sunday" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Monday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Monday.ordinal)}"
+                        android:text="@string/monday" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Tuesday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Tuesday.ordinal)}"
+                        android:text="@string/tuesday" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Wednesday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Wednesday.ordinal)}"
+                        android:text="@string/wednesday" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Thursday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Thursday.ordinal)}"
+                        android:text="@string/thursday" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Friday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Friday.ordinal)}"
+                        android:text="@string/friday" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:backgroundTint="@{viewModel.isDayOns[EDay.Saturday.ordinal()] ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onDayClick(EDay.Saturday.ordinal)}"
+                        android:text="@string/saturday" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@{viewModel.areAllDaysOn ? @color/pink_300 : @color/grey_500}"
+                    android:onClick="@{() -> viewModel.onAllDaysClick()}"
+                    android:text="@string/everyday" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="NOTIFICATION" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@{viewModel.isNotificationOn() ? @color/pink_300 : @color/grey_500}"
+                        android:onClick="@{() -> viewModel.onNotificationClick(true)}"
+                        android:text="ON" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@{viewModel.isNotificationOn() ? @color/grey_500 : @color/pink_300}"
+                        android:onClick="@{() -> viewModel.onNotificationClick(false)}"
+                        android:text="OFF" />
+                </LinearLayout>
+
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:timePickerMode="spinner"
+                    android:visibility="@{viewModel.isNotificationOn() ? View.VISIBLE : View.GONE}"
+                    android:hour="@={viewModel.hour}"
+                    android:minute="@={viewModel.minute}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onSaveClick()}"
+                    android:text="Save" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

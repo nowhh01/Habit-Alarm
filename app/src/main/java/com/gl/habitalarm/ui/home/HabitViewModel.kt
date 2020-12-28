@@ -20,7 +20,7 @@ class HabitViewModel @ViewModelInject constructor(
     private val mDate = MutableLiveData(LocalDate.now())
     val date: LiveData<String>
         get() = Transformations.map(mDate) { date ->
-            Log.d(TAG, "date: Transformations.map(): called")
+            Log.d(TAG, "date: Transformations.map(): called with $date")
 
             val result = if(date == LocalDate.now()) {
                 "TODAY"
@@ -34,11 +34,11 @@ class HabitViewModel @ViewModelInject constructor(
 
     val habitsWithRepetitions: LiveData<List<HabitWithRepetition>>
         get() = Transformations.switchMap(mDate) { date ->
-            Log.d(TAG, "habitsWithRepetitions: Transformations.switchMap(): called")
+            Log.d(TAG, "habitsWithRepetitions: Transformations.switchMap(): called with $date")
 
             val result = mHabitRepository.getHabitsWithRepetitionsByDate(date).asLiveData()
 
-            Log.d(TAG, "habitsWithRepetitions: Transformations.switchMap(): returns $result")
+            Log.d(TAG, "habitsWithRepetitions: Transformations.switchMap(): returns ${result.value?.size} items")
             result
         }
 
@@ -84,7 +84,7 @@ class HabitViewModel @ViewModelInject constructor(
                 mRepetitionRepository.removeRepetition(repetition!!)
                 Log.d(
                     TAG,
-                    "saveOrUpdateRepetition(): Repetition with ${repetition.id} removed")
+                    "saveOrUpdateRepetition(): Repetition with id ${repetition.id} removed")
             }
         }
     }

@@ -19,5 +19,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.create.CreateActivity"
+            android:theme="@style/Theme.HabitAlarm" />
+
     </application>
+
 </manifest>
