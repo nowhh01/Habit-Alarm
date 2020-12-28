@@ -7,5 +7,9 @@ enum class EDay {
     Wednesday,
     Thursday,
     Friday,
-    Saturday
+    Saturday;
+
+    override fun toString(): String {
+        return super.toString().substring(0, 2).toUpperCase()
+    }
 }
