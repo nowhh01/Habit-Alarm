@@ -12,15 +12,21 @@ import androidx.databinding.DataBindingUtil
 import com.gl.habitalarm.R
 import com.gl.habitalarm.databinding.ActivityHabitBinding
 import com.gl.habitalarm.ui.create.CreateActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.gl.habitalarm.ui.detail.HabitDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_habit.*
 
 private const val TAG = "HabitActivity"
 
 @AndroidEntryPoint
-class HabitActivity : AppCompatActivity() {
+class HabitActivity : AppCompatActivity(), HabitAdapter.ICallable {
     private val mViewModel: HabitViewModel by viewModels()
+
+    override fun onHabitSelected(habitId: Long) {
+        Log.d(TAG, "onHabitSelected(): called with habitId $habitId")
+
+        startActivity(HabitDetailActivity.createIntent(this, habitId))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate(): called")
@@ -29,6 +35,7 @@ class HabitActivity : AppCompatActivity() {
 
         val binding: ActivityHabitBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_habit)
+
         binding.bottomNav.setOnNavigationItemSelectedListener { item: MenuItem ->
             when(item.itemId) {
                 R.id.navigation_create -> startNewActivity(bottom_nav, CreateActivity::class.java)
