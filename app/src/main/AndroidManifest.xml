@@ -19,9 +19,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.create.CreateActivity"
+        <activity
+            android:name=".ui.create.CreateActivity"
             android:theme="@style/Theme.HabitAlarm" />
 
+        <activity
+            android:name=".ui.detail.HabitDetailActivity"
+            android:theme="@style/Theme.HabitAlarm"/>
     </application>
 
 </manifest>

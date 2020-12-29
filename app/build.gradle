@@ -48,6 +48,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     def room_version = "2.2.6"
     def hilt_version = "2.28-alpha"
@@ -57,6 +61,7 @@ dependencies {
     def coroutines_version = "1.4.2"
     def activity_version = "1.1.0"
     def fragment_version = "1.2.5"
+    def chart_version = "v3.1.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -79,6 +84,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_ext_version"
+    implementation "com.github.PhilJay:MPAndroidChart:$chart_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_ext_version"
     kapt "androidx.room:room-compiler:$room_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"

@@ -2,6 +2,7 @@ package com.gl.habitalarm.ui.home
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,10 @@ private const val TAG_DIFF_CALLBACK = "ItemCallback"
 
 class HabitAdapter
     : ListAdapter<HabitWithRepetition, HabitAdapter.HabitViewHolder>(DIFF_CALLBACK) {
+    interface ICallable {
+        fun onHabitSelected(habitId: Long)
+    }
+
     private lateinit var mViewModel: HabitViewModel
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -44,6 +49,7 @@ class HabitAdapter
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ListItemHabitBinding =
             DataBindingUtil.inflate(layoutInflater, viewType, parent, false)
+
         binding.checkbox.setOnClickListener { v ->
             mViewModel.saveOrUpdateRepetition(
                 binding.repetition,
@@ -51,6 +57,7 @@ class HabitAdapter
                 (v as CheckBox).isChecked
             )
         }
+
         return HabitViewHolder(binding)
     }
 
@@ -62,7 +69,23 @@ class HabitAdapter
     }
 
     inner class HabitViewHolder(private val mBinding: ListItemHabitBinding)
-        : RecyclerView.ViewHolder(mBinding.root) {
+        : RecyclerView.ViewHolder(mBinding.root), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            Log.d(TAG_HOLDER, "onClick(): called")
+
+            val context = v?.context
+            if(context is ICallable) {
+                mBinding.habit?.apply {
+                    context.onHabitSelected(id)
+                }
+            }
+        }
+
         fun bind(habitWithRepetition: HabitWithRepetition) {
             Log.d(TAG_HOLDER, "bind(): called with habitId ${habitWithRepetition.habit.id}")
 
@@ -87,13 +110,15 @@ class HabitAdapter
                 ): Boolean {
                     Log.d(
                         TAG_DIFF_CALLBACK,
-                        "areItemsTheSame(): called with habits ${oldItem.habit.id}, ${newItem.habit.id}")
+                        "areItemsTheSame(): called with habits ${oldItem.habit.id}, ${newItem.habit.id}"
+                    )
 
                     val bSame = oldItem.areTheSameItem(newItem)
 
                     Log.d(
                         TAG_DIFF_CALLBACK,
-                        "areItemsTheSame(): returns $bSame")
+                        "areItemsTheSame(): returns $bSame"
+                    )
 
                     return bSame
                 }
@@ -104,13 +129,15 @@ class HabitAdapter
                 ): Boolean {
                     Log.d(
                         TAG_DIFF_CALLBACK,
-                        "areContentsTheSame(): called with habits ${oldItem.habit.id}, ${newItem.habit.id}")
+                        "areContentsTheSame(): called with habits ${oldItem.habit.id}, ${newItem.habit.id}"
+                    )
 
                     val bSame = oldItem.areTheSameContent(newItem)
 
                     Log.d(
                         TAG_DIFF_CALLBACK,
-                        "areContentsTheSame(): returns $bSame")
+                        "areContentsTheSame(): returns $bSame"
+                    )
 
                     return bSame
                 }

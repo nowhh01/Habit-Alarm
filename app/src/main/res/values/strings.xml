@@ -11,4 +11,10 @@
 
     <string name="settings">SETTINGS</string>
     <string name="create">CREATE</string>
+    <string name="edit">EDIT</string>
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
+
+    <string name="dialog_delete_title">DELETE</string>
+    <string name="dialog_delete_message">The habit will be deleted permanently.</string>
 </resources>
