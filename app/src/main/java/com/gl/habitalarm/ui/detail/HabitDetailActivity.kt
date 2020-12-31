@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.gl.habitalarm.R
 import com.gl.habitalarm.databinding.ActivityHabitDetailBinding
+import com.gl.habitalarm.ui.createoredit.HabitCreateOrEditActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -90,17 +91,17 @@ class HabitDetailActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
         when (item.itemId) {
             R.id.edit -> {
-
+                startActivity(HabitCreateOrEditActivity.createIntent(this, mHabitId))
             }
             R.id.delete -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.dialog_delete_title)
-                    .setMessage(R.string.dialog_delete_message)
-                    .setPositiveButton(R.string.delete) { _, _ ->
-                        mViewModel.removeHabit()
-                        onBackPressed()
-                    }
-                    .setNegativeButton(R.string.cancel) { _, _ -> }
+                        .setMessage(R.string.dialog_delete_message)
+                        .setPositiveButton(R.string.delete) { _, _ ->
+                            mViewModel.removeHabit()
+                            onBackPressed()
+                        }
+                        .setNegativeButton(R.string.cancel) { _, _ -> }
 
                 val dialog = builder.create()
                 dialog.show()
