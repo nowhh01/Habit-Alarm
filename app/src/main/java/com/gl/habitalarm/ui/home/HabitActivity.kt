@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.gl.habitalarm.R
 import com.gl.habitalarm.databinding.ActivityHabitBinding
-import com.gl.habitalarm.ui.create.CreateActivity
+import com.gl.habitalarm.ui.createoredit.HabitCreateOrEditActivity
 import com.gl.habitalarm.ui.detail.HabitDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_habit.*
@@ -38,7 +38,7 @@ class HabitActivity : AppCompatActivity(), HabitAdapter.ICallable {
 
         binding.bottomNav.setOnNavigationItemSelectedListener { item: MenuItem ->
             when(item.itemId) {
-                R.id.navigation_create -> startNewActivity(bottom_nav, CreateActivity::class.java)
+                R.id.navigation_create -> startNewActivity(bottom_nav, HabitCreateOrEditActivity::class.java)
                 R.id.navigation_settings -> {
                 }
             }

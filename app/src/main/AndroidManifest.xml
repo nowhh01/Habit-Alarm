@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".ui.create.CreateActivity"
+            android:name=".ui.createoredit.HabitCreateOrEditActivity"
             android:theme="@style/Theme.HabitAlarm" />
 
         <activity
