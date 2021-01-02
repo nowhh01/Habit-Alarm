@@ -26,6 +26,12 @@
         <activity
             android:name=".ui.detail.HabitDetailActivity"
             android:theme="@style/Theme.HabitAlarm"/>
+
+        <service
+            android:name=".services.NotificationService"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
 
 </manifest>
