@@ -95,7 +95,7 @@ class HabitDetailActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             }
             R.id.delete -> {
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle(R.string.dialog_delete_title)
+                builder.setTitle(R.string.delete)
                         .setMessage(R.string.dialog_delete_message)
                         .setPositiveButton(R.string.delete) { _, _ ->
                             mViewModel.removeHabit()
