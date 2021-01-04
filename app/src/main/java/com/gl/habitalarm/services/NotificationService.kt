@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.gl.habitalarm.R
 import com.gl.habitalarm.ui.home.HabitActivity
 
@@ -26,17 +27,7 @@ class NotificationService : Service() {
 
         super.onCreate()
 
-        // Create NotificationChannel
-        val name: CharSequence = getString(R.string.app_name)
-        val description = getString(R.string.notification_channel_description)
-        val importance = NotificationManager.IMPORTANCE_LOW
-        val channel = NotificationChannel(CHANNEL_ID, name, importance)
-        channel.description = description
-
-        // Register the channel with the system; you can't change the importance
-        // or other notification behaviors after this
-        val notificationManager = getSystemService(NotificationManager::class.java)
-        notificationManager.createNotificationChannel(channel)
+        createNotificationChannel(this)
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -68,13 +59,28 @@ class NotificationService : Service() {
     }
 
     companion object {
-        private const val CHANNEL_ID = "HabitAlarm"
-        private const val GROUP_KEY_NOTIFICATION = "com.gl.habitalarm.services.group_key"
-        private const val INTENT_KEY_ID = "com.gl.habitalarm.services.id"
-        private const val INTENT_KEY_NAME = "com.gl.habitalarm.services.name"
-        private const val INTENT_KEY_DAYS = "com.gl.habitalarm.services.days"
-        private const val INTENT_KEY_HOUR = "com.gl.habitalarm.services.hour"
-        private const val INTENT_KEY_MINUTE = "com.gl.habitalarm.services.minute"
+        const val CHANNEL_ID = "HabitAlarm"
+        const val GROUP_KEY_NOTIFICATION = "com.gl.habitalarm.services.group_key"
+        const val INTENT_KEY_ID = "com.gl.habitalarm.services.id"
+        const val INTENT_KEY_NAME = "com.gl.habitalarm.services.name"
+        const val INTENT_KEY_DAYS = "com.gl.habitalarm.services.days"
+        const val INTENT_KEY_HOUR = "com.gl.habitalarm.services.hour"
+        const val INTENT_KEY_MINUTE = "com.gl.habitalarm.services.minute"
+
+        fun createNotificationChannel(context: Context) {
+            Log.d(TAG, "createNotificationChannel(): called with $context")
+
+            val name: CharSequence = context.getString(R.string.app_name)
+            val description = context.getString(R.string.notification_channel_description)
+            val importance = NotificationManager.IMPORTANCE_LOW
+            val channel = NotificationChannel(CHANNEL_ID, name, importance)
+            channel.description = description
+
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            val notificationManager = getSystemService(context, NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(channel)
+        }
 
         fun createIntent(packageContext: Context?, id: Long, name: String): Intent {
             Log.d(TAG, "createIntent(): called with id $id, name $name")
