@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HabitAlarm">
 
+        <!-- Activity -->
         <activity android:name=".ui.home.HabitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,17 +27,23 @@
 
         <activity
             android:name=".ui.detail.HabitDetailActivity"
-            android:theme="@style/Theme.HabitAlarm"/>
+            android:theme="@style/Theme.HabitAlarm" />
 
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/settings" />
+
+        <!-- Service -->
         <service
             android:name=".services.NotificationService"
             android:enabled="true"
             android:exported="false" />
 
+        <!-- Provider -->
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove" />
-
     </application>
+
 </manifest>

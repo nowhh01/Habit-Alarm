@@ -19,4 +19,14 @@
 
     <string name="notification_content">Don\'t forget to check out your habit today!</string>
     <string name="notification_channel_description">Habit Alarm notification</string>
+
+    <string name="settings_header_appearance">Theme</string>
+    <string name="dark_theme_key">dark_theme</string>
+    <string name="dark_theme_title">Dark Theme</string>
+
+    <string name="settings_header_notification">Reminder</string>
+    <string name="notification_key">notification</string>
+    <string name="notification_title">Notification</string>
+    <string name="notification_summary">Set notification settings like sound, light, etc</string>
+
 </resources>

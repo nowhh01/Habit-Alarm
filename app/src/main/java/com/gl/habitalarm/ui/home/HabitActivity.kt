@@ -13,6 +13,7 @@ import com.gl.habitalarm.R
 import com.gl.habitalarm.databinding.ActivityHabitBinding
 import com.gl.habitalarm.ui.createoredit.HabitCreateOrEditActivity
 import com.gl.habitalarm.ui.detail.HabitDetailActivity
+import com.gl.habitalarm.ui.settings.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_habit.*
 
@@ -30,6 +31,7 @@ class HabitActivity : AppCompatActivity(), HabitAdapter.ICallable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate(): called")
+
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
 
@@ -38,8 +40,11 @@ class HabitActivity : AppCompatActivity(), HabitAdapter.ICallable {
 
         binding.bottomNav.setOnNavigationItemSelectedListener { item: MenuItem ->
             when(item.itemId) {
-                R.id.navigation_create -> startNewActivity(bottom_nav, HabitCreateOrEditActivity::class.java)
+                R.id.navigation_create -> {
+                    startNewActivity(bottom_nav, HabitCreateOrEditActivity::class.java)
+                }
                 R.id.navigation_settings -> {
+                    startNewActivity(bottom_nav, SettingsActivity::class.java)
                 }
             }
             true
@@ -47,6 +52,8 @@ class HabitActivity : AppCompatActivity(), HabitAdapter.ICallable {
     }
 
     private fun startNewActivity(view: View, activityClass: Class<*>) {
+        Log.d(TAG, "startNewActivity(): called with $activityClass")
+
         val options = ActivityOptions.makeScaleUpAnimation(
                 view,
                 0,
