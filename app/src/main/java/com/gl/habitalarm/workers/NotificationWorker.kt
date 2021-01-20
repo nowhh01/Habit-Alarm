@@ -33,7 +33,7 @@ class NotificationWorker(context: Context, workerParams: WorkerParameters)
                         data.getLong(DATA_KEY_ID, 0L),
                         data.getString(DATA_KEY_NAME)!!)
 
-                context.startService(intent)
+                context.startForegroundService(intent);
 
                 Log.d(TAG, "doWork(): startService() called")
             }
